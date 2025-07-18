@@ -1,8 +1,9 @@
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import { ArrowLeft, Download, Mail, Globe } from 'lucide-react';
+import { ArrowLeft, Download, Mail } from 'lucide-react';
 import { Quotation } from '@/types/quote';
+import html2pdf from 'html2pdf.js';
 
 interface QuotationViewProps {
   quotation: Quotation;
@@ -11,8 +12,15 @@ interface QuotationViewProps {
 
 export function QuotationView({ quotation, onBack }: QuotationViewProps) {
   const handleDownloadPDF = () => {
-    // Implementation for PDF download would go here
-    console.log('Download PDF functionality to be implemented');
+    const element = document.getElementById('quotation-document');
+    const opt = {
+      margin: 0.5,
+      filename: `quotation-${quotation.quoteNumber}.pdf`,
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2, useCORS: true },
+      jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+    };
+    html2pdf().set(opt).from(element).save();
   };
 
   const handleSendEmail = () => {
@@ -48,24 +56,26 @@ export function QuotationView({ quotation, onBack }: QuotationViewProps) {
         </div>
 
         {/* Quotation Document */}
-        <Card className="bg-white shadow-float border print:shadow-none print:border-0">
+        <Card id="quotation-document" className="bg-white shadow-float border print:shadow-none print:border-0">
           <CardContent className="p-8 print:p-6">
             {/* Header */}
             <div className="flex justify-between items-start mb-8">
               <div>
                 <div className="flex items-center gap-3 mb-2">
-                  <div className="p-2 bg-gradient-primary rounded-lg">
-                    <Globe className="h-6 w-6 text-white" />
-                  </div>
+                  <img 
+                    src="/lovable-uploads/6550ddf7-36a2-4299-bb5f-7d035e3fbb0f.png" 
+                    alt="Build IT Logo" 
+                    className="h-12 w-12 object-contain"
+                  />
                   <div>
-                    <h1 className="text-2xl font-bold text-primary">UPPERCASE WEB</h1>
+                    <h1 className="text-2xl font-bold text-primary">Build IT</h1>
                     <p className="text-sm text-muted-foreground">Professional Website Solutions</p>
                   </div>
                 </div>
                 <div className="text-sm text-muted-foreground">
-                  <p>Email: info@uppercaseweb.com</p>
+                  <p>Email: info@buildit.com</p>
                   <p>Phone: +254 7XX XXX XXX</p>
-                  <p>Website: www.uppercaseweb.com</p>
+                  <p>Website: www.buildit.com</p>
                 </div>
               </div>
               <div className="text-right">
@@ -195,7 +205,7 @@ export function QuotationView({ quotation, onBack }: QuotationViewProps) {
             {/* Footer */}
             <div className="mt-8 pt-6 border-t text-center">
               <p className="text-sm text-muted-foreground">
-                Thank you for choosing Uppercase Web for your website development needs.
+                Thank you for choosing Build IT for your website development needs.
               </p>
             </div>
           </CardContent>
