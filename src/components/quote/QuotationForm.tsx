@@ -39,15 +39,16 @@ export function QuotationForm({ calculation, onBack, onSubmit }: QuotationFormPr
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!formData.fullName.trim()) {
       return;
     }
 
+    const quoteNumber = generateQuoteNumber();
     const quotation: Quotation = {
-      quoteNumber: generateQuoteNumber(),
+      quoteNumber,
       date: new Date().toLocaleDateString('en-US', {
         year: 'numeric',
         month: 'long',
@@ -57,6 +58,34 @@ export function QuotationForm({ calculation, onBack, onSubmit }: QuotationFormPr
       calculation,
       validUntil: getValidUntilDate(),
     };
+
+    // Send data to Google Apps Script
+    try {
+      await fetch("https://script.google.com/macros/s/AKfycbz9277UTwNHgf31G0vZ021sfM2-cq4YvQOrTMLBKrs6WP-0iybeSWHs6iJjwmAqL6pmzQ/exec", {
+        method: "POST",
+        body: JSON.stringify({
+          clientName: formData.fullName,
+          email: formData.email,
+          phone: formData.phoneNumber,
+          company: formData.companyName,
+          websiteType: calculation.websiteType?.name,
+          addOns: calculation.addOns.map(addon => addon.name).join(', '),
+          hosting: calculation.hostingPlan?.name,
+          urgency: calculation.urgencyLevel?.name,
+          total: Math.round(calculation.total),
+          quoteNumber: quoteNumber,
+          notes: `Builder: ${calculation.builderType?.name}`
+        }),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+      .then(res => res.json())
+      .then(res => console.log("Success:", res))
+      .catch(err => console.error("Error:", err));
+    } catch (error) {
+      console.error("Failed to send data:", error);
+    }
 
     onSubmit(quotation);
   };
