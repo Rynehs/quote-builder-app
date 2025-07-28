@@ -22,9 +22,8 @@ export const websiteTypes: WebsiteType[] = [
     price: 20000,
     purpose: 'Multi-page site showcasing a company or professional services',
     includes: [
-      '5–8 pages (Home, About, Services, Contact, Blog/FAQs)',
+      '3-5 pages (Home, About, Services, Contact,etc)',
       'Contact form',
-      'WhatsApp or email integration',
       'Basic SEO setup',
       'Responsive & professional layout'
     ],
