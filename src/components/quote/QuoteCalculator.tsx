@@ -77,7 +77,7 @@ export function QuoteCalculator({ onGenerateQuote }: QuoteCalculatorProps) {
             </div>
             <div>
               <h1 className="text-4xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-                UPPERCASE WEB
+                BuildIT WEB
               </h1>
               <p className="text-sm text-muted-foreground">Professional Website Solutions</p>
             </div>
