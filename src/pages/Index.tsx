@@ -79,7 +79,7 @@ const Index = () => {
                 </div>
                 <h3 className="text-xl font-semibold">Professional Service</h3>
                 <p className="text-muted-foreground">
-                  Choose between freelancer or agency services to match your project needs.
+                  Choose services to match your project needs.
                 </p>
               </CardContent>
             </Card>
