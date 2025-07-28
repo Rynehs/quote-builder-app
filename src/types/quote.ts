@@ -8,6 +8,7 @@ export interface AddOn {
   id: string;
   name: string;
   price: number;
+  description: string;
 }
 
 export interface HostingPlan {

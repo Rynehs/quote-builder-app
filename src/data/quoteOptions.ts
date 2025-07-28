@@ -9,12 +9,12 @@ export const websiteTypes: WebsiteType[] = [
 ];
 
 export const addOns: AddOn[] = [
-  { id: 'seo', name: 'SEO Optimization', price: 7000 },
-  { id: 'whatsapp', name: 'WhatsApp Chat', price: 2000 },
-  { id: 'payment', name: 'Payment Integration', price: 6000 },
-  { id: 'logo', name: 'Logo Design', price: 3000 },
-  { id: 'social', name: 'Social Media Setup', price: 3500 },
-  { id: 'custom', name: 'Custom Feature', price: 10000 },
+  { id: 'seo', name: 'SEO Optimization', price: 7000, description: 'Improve your website\'s search engine rankings with keyword optimization, meta tags, and technical SEO' },
+  { id: 'whatsapp', name: 'WhatsApp Chat', price: 2000, description: 'Add a WhatsApp chat widget for instant customer communication and support' },
+  { id: 'payment', name: 'Payment Integration', price: 6000, description: 'Integrate M-Pesa, PayPal, Stripe and other payment gateways for online transactions' },
+  { id: 'logo', name: 'Logo Design', price: 3000, description: 'Professional logo design with multiple concepts, revisions, and brand guidelines' },
+  { id: 'social', name: 'Social Media Setup', price: 3500, description: 'Setup and optimize your social media profiles with consistent branding and linking' },
+  { id: 'custom', name: 'Custom Feature', price: 10000, description: 'Any custom functionality or integration specific to your business needs' },
 ];
 
 export const hostingPlans: HostingPlan[] = [

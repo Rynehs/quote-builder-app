@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { ArrowLeft, ArrowRight, User, Mail, Building, Phone } from 'lucide-react';
+import { ArrowLeft, ArrowRight, User, Mail, Building, Phone, Clock } from 'lucide-react';
 import { QuoteCalculation, ClientInfo, Quotation } from '@/types/quote';
 
 interface QuotationFormProps {
@@ -183,7 +183,24 @@ export function QuotationForm({ calculation, onBack, onSubmit }: QuotationFormPr
                 />
               </div>
 
-              <div className="pt-4">
+              <div className="pt-4 space-y-3">
+                <div className="bg-gradient-to-r from-primary/10 to-accent/10 p-4 rounded-lg border border-primary/20">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Clock className="h-4 w-4 text-primary" />
+                    <span className="font-medium text-sm">Limited Time Offer</span>
+                  </div>
+                  <p className="text-sm text-muted-foreground">
+                    Lock in this price for 14 days! Quote expires on{' '}
+                    <span className="font-medium text-foreground">
+                      {new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toLocaleDateString('en-GB', {
+                        day: 'numeric',
+                        month: 'long',
+                        year: 'numeric'
+                      })}
+                    </span>
+                  </p>
+                </div>
+                
                 <Button
                   type="submit"
                   variant="professional"
@@ -191,9 +208,13 @@ export function QuotationForm({ calculation, onBack, onSubmit }: QuotationFormPr
                   className="w-full"
                   disabled={!formData.fullName.trim()}
                 >
-                  Generate Quotation
+                  Reserve This Quote
                   <ArrowRight className="h-4 w-4" />
                 </Button>
+                
+                <p className="text-xs text-center text-muted-foreground">
+                  No payment required. We'll contact you to schedule a consultation.
+                </p>
               </div>
             </form>
           </CardContent>
