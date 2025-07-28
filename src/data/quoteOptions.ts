@@ -1,11 +1,11 @@
 import { WebsiteType, AddOn, HostingPlan, UrgencyLevel, BuilderType } from '@/types/quote';
 
 export const websiteTypes: WebsiteType[] = [
-  { id: 'landing', name: 'Landing Page', price: 5000 },
-  { id: 'business', name: 'Business Website', price: 15000 },
-  { id: 'ecommerce', name: 'E-commerce Website', price: 45000 },
-  { id: 'blog', name: 'Blog/Portfolio', price: 10000 },
-  { id: 'lms', name: 'LMS / Membership', price: 70000 },
+  { id: 'landing', name: 'Landing Page', price: 10000 },
+  { id: 'business', name: 'Business Website', price: 20000 },
+  { id: 'ecommerce', name: 'E-commerce Website', price: 50000 },
+  { id: 'blog', name: 'Blog/Portfolio', price: 15000 },
+  { id: 'lms', name: 'LMS / Membership', price: 75000 },
 ];
 
 export const addOns: AddOn[] = [

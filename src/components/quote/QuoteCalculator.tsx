@@ -7,10 +7,10 @@ import { WebsiteTypeSelector } from './WebsiteTypeSelector';
 import { AddOnsSelector } from './AddOnsSelector';
 import { HostingSelector } from './HostingSelector';
 import { UrgencySelector } from './UrgencySelector';
-import { BuilderSelector } from './BuilderSelector';
+
 import { CostBreakdown } from './CostBreakdown';
 import { QuoteCalculation } from '@/types/quote';
-import { websiteTypes, addOns, hostingPlans, urgencyLevels, builderTypes } from '@/data/quoteOptions';
+import { websiteTypes, addOns, hostingPlans, urgencyLevels } from '@/data/quoteOptions';
 
 interface QuoteCalculatorProps {
   onGenerateQuote: (calculation: QuoteCalculation) => void;
@@ -21,16 +21,14 @@ export function QuoteCalculator({ onGenerateQuote }: QuoteCalculatorProps) {
   const [selectedAddOns, setSelectedAddOns] = useState<string[]>([]);
   const [selectedHosting, setSelectedHosting] = useState<string>('none');
   const [selectedUrgency, setSelectedUrgency] = useState<string>('flexible');
-  const [selectedBuilder, setSelectedBuilder] = useState<string>('freelancer');
+  
 
   const calculateTotal = () => {
     const websiteType = websiteTypes.find(w => w.id === selectedWebsiteType);
     const selectedAddOnObjects = addOns.filter(addon => selectedAddOns.includes(addon.id));
     const hostingPlan = hostingPlans.find(h => h.id === selectedHosting);
     const urgencyLevel = urgencyLevels.find(u => u.id === selectedUrgency);
-    const builderType = builderTypes.find(b => b.id === selectedBuilder);
-
-    if (!websiteType || !hostingPlan || !urgencyLevel || !builderType) {
+    if (!websiteType || !hostingPlan || !urgencyLevel) {
       return null;
     }
 
@@ -40,23 +38,20 @@ export function QuoteCalculator({ onGenerateQuote }: QuoteCalculatorProps) {
     
     const subtotal = basePrice + addOnsTotal + hostingCost;
     const urgencyMarkup = subtotal * (urgencyLevel.multiplier - 1);
-    const afterUrgency = subtotal + urgencyMarkup;
-    const agencyMarkup = afterUrgency * (builderType.multiplier - 1);
-    const total = afterUrgency + agencyMarkup;
+    const total = subtotal + urgencyMarkup;
 
     return {
       websiteType,
       addOns: selectedAddOnObjects,
       hostingPlan,
       urgencyLevel,
-      builderType,
       total,
       breakdown: {
         basePrice,
         addOnsTotal,
         hostingCost,
         urgencyMarkup,
-        agencyMarkup,
+        agencyMarkup: 0,
       }
     };
   };
@@ -69,7 +64,7 @@ export function QuoteCalculator({ onGenerateQuote }: QuoteCalculatorProps) {
     }
   };
 
-  const isComplete = selectedWebsiteType && selectedHosting && selectedUrgency && selectedBuilder;
+  const isComplete = selectedWebsiteType && selectedHosting && selectedUrgency;
 
   return (
     <div className="min-h-screen bg-background p-4">
@@ -116,10 +111,6 @@ export function QuoteCalculator({ onGenerateQuote }: QuoteCalculatorProps) {
               onChange={setSelectedUrgency}
             />
 
-            <BuilderSelector
-              value={selectedBuilder}
-              onChange={setSelectedBuilder}
-            />
           </div>
 
           {/* Right Column - Cost Breakdown */}
@@ -180,10 +171,6 @@ export function QuoteCalculator({ onGenerateQuote }: QuoteCalculatorProps) {
                   <div className="flex items-center gap-2">
                     <Badge variant="default" className="text-xs">✓</Badge>
                     <span className="text-sm">Urgency Level</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Badge variant="default" className="text-xs">✓</Badge>
-                    <span className="text-sm">Builder Type</span>
                   </div>
                 </div>
               </CardContent>
