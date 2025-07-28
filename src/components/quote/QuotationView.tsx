@@ -63,7 +63,7 @@ export function QuotationView({ quotation, onBack }: QuotationViewProps) {
               <div>
                 <div className="flex items-center gap-3 mb-2">
                   <img 
-                    src="/lovable-uploads/6550ddf7-36a2-4299-bb5f-7d035e3fbb0f.png" 
+                    src="public/logo.png" 
                     alt="Build IT Logo" 
                     className="h-12 w-12 object-contain"
                   />
