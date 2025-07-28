@@ -2,6 +2,11 @@ export interface WebsiteType {
   id: string;
   name: string;
   price: number;
+  purpose: string;
+  includes: string[];
+  clientFit: string;
+  recommendedAddOns: string[];
+  techOptions?: string;
 }
 
 export interface AddOn {

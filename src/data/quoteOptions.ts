@@ -1,11 +1,85 @@
 import { WebsiteType, AddOn, HostingPlan, UrgencyLevel, BuilderType } from '@/types/quote';
 
 export const websiteTypes: WebsiteType[] = [
-  { id: 'landing', name: 'Landing Page', price: 10000 },
-  { id: 'business', name: 'Business Website', price: 20000 },
-  { id: 'ecommerce', name: 'E-commerce Website', price: 50000 },
-  { id: 'blog', name: 'Blog/Portfolio', price: 15000 },
-  { id: 'lms', name: 'LMS / Membership', price: 75000 },
+  { 
+    id: 'landing', 
+    name: 'Landing Page', 
+    price: 10000,
+    purpose: 'One-page site focused on a single goal (e.g. product, campaign, lead capture)',
+    includes: [
+      'Clean single-scroll layout',
+      'Hero section + CTA',
+      'About / Services / Contact',
+      'WhatsApp or form integration',
+      'Mobile responsiveness'
+    ],
+    clientFit: 'Events, ad campaigns, product launches, personal portfolios',
+    recommendedAddOns: ['whatsapp', 'seo', 'logo']
+  },
+  { 
+    id: 'business', 
+    name: 'Business Website', 
+    price: 20000,
+    purpose: 'Multi-page site showcasing a company or professional services',
+    includes: [
+      '5–8 pages (Home, About, Services, Contact, Blog/FAQs)',
+      'Contact form',
+      'WhatsApp or email integration',
+      'Basic SEO setup',
+      'Responsive & professional layout'
+    ],
+    clientFit: 'Local businesses, freelancers, agencies, consultants',
+    recommendedAddOns: ['whatsapp', 'logo', 'seo', 'social']
+  },
+  { 
+    id: 'ecommerce', 
+    name: 'E-Commerce Website', 
+    price: 50000,
+    purpose: 'Online store to sell physical or digital products',
+    includes: [
+      'Product catalog (10–20 items to start)',
+      'Cart + Checkout',
+      'Payment integration (MPesa, Paystack, etc.)',
+      'Order management dashboard',
+      'Inventory controls',
+      'Responsive design'
+    ],
+    clientFit: 'Retailers, fashion shops, service sellers',
+    recommendedAddOns: ['payment', 'whatsapp', 'custom'],
+    techOptions: 'WooCommerce, Shopify, or custom Laravel/Node build'
+  },
+  { 
+    id: 'blog', 
+    name: 'Blog/Portfolio', 
+    price: 15000,
+    purpose: 'Showcase work, articles, photography, etc.',
+    includes: [
+      'Blog or portfolio grid',
+      'CMS backend or markdown-based system',
+      'Author bio, social links',
+      'Responsive & minimalist layout'
+    ],
+    clientFit: 'Writers, photographers, creatives',
+    recommendedAddOns: ['seo', 'logo']
+  },
+  { 
+    id: 'lms', 
+    name: 'LMS / Membership Site', 
+    price: 75000,
+    purpose: 'Deliver online courses, gated content, or community features',
+    includes: [
+      'Course/module creation',
+      'Member registration/login',
+      'Payment integration',
+      'Progress tracking (optional)',
+      'Admin panel',
+      'Responsive UI',
+      'Video upload/embed support'
+    ],
+    clientFit: 'Coaches, schools, training centers',
+    recommendedAddOns: ['payment', 'custom'],
+    techOptions: 'LearnDash (WordPress), Moodle, or custom Laravel/Vue solution'
+  },
 ];
 
 export const addOns: AddOn[] = [
