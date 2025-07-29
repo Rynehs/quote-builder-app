@@ -11,8 +11,6 @@ const Index = () => {
         <div className="text-center space-y-8 max-w-4xl mx-auto">
           {/* Logo and Brand */}
           <div className="flex items-center justify-center gap-3 mb-8">
-            <link rel="icon" href="public/logo.png" type="image/png" />
-            </div>
             <div>
               <h1 className="text-5xl font-bold bg-gradient-primary bg-clip-text text-transparent">
                BuildIT

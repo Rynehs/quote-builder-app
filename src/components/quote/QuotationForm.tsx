@@ -5,6 +5,8 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { ArrowLeft, ArrowRight, User, Mail, Building, Phone, Clock } from 'lucide-react';
 import { QuoteCalculation, ClientInfo, Quotation } from '@/types/quote';
+import { supabase } from '@/integrations/supabase/client';
+import { toast } from '@/hooks/use-toast';
 
 interface QuotationFormProps {
   calculation: QuoteCalculation;
@@ -85,6 +87,49 @@ export function QuotationForm({ calculation, onBack, onSubmit }: QuotationFormPr
       .catch(err => console.error("Error:", err));
     } catch (error) {
       console.error("Failed to send data:", error);
+    }
+
+    // Send email if client provided email address
+    if (formData.email && formData.email.trim()) {
+      try {
+        const { error } = await supabase.functions.invoke('send-invoice-email', {
+          body: {
+            clientEmail: formData.email,
+            clientName: formData.fullName,
+            quoteNumber: quoteNumber,
+            websiteType: calculation.websiteType?.name || 'Custom Website',
+            total: Math.round(calculation.total),
+            validUntil: getValidUntilDate(),
+            calculation: calculation
+          }
+        });
+
+        if (error) {
+          console.error('Error sending email:', error);
+          toast({
+            title: "Quote Generated",
+            description: "Your quote has been generated but email could not be sent. Please contact us for the quote details.",
+            variant: "destructive"
+          });
+        } else {
+          toast({
+            title: "Quote Sent Successfully",
+            description: "Your quote has been generated and sent to your email address.",
+          });
+        }
+      } catch (emailError) {
+        console.error('Failed to send email:', emailError);
+        toast({
+          title: "Quote Generated",
+          description: "Your quote has been generated but email could not be sent. Please contact us for the quote details.",
+          variant: "destructive"
+        });
+      }
+    } else {
+      toast({
+        title: "Quote Generated",
+        description: "Your quote has been generated successfully.",
+      });
     }
 
     onSubmit(quotation);
