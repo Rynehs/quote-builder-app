@@ -1,8 +1,9 @@
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import { ArrowLeft, Download, Mail } from 'lucide-react';
+import { ArrowLeft, Download, Mail, FileText } from 'lucide-react';
 import { Quotation } from '@/types/quote';
+import { ContractGenerator } from './ContractGenerator';
 import html2pdf from 'html2pdf.js';
 
 interface QuotationViewProps {
@@ -32,6 +33,18 @@ export function QuotationView({ quotation, onBack }: QuotationViewProps) {
     window.print();
   };
 
+  const handleGenerateContract = () => {
+    const element = document.getElementById('contract-document');
+    const opt = {
+      margin: 0.5,
+      filename: `contract-${quotation.quoteNumber}.pdf`,
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2, useCORS: true },
+      jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+    };
+    html2pdf().set(opt).from(element).save();
+  };
+
   return (
     <div className="min-h-screen bg-background p-4">
       <div className="max-w-4xl mx-auto space-y-6">
@@ -52,6 +65,10 @@ export function QuotationView({ quotation, onBack }: QuotationViewProps) {
           <Button onClick={handleSendEmail} variant="professional" className="flex items-center gap-2">
             <Mail className="h-4 w-4" />
             Send to Email
+          </Button>
+          <Button onClick={handleGenerateContract} variant="outline" className="flex items-center gap-2">
+            <FileText className="h-4 w-4" />
+            Generate Contract
           </Button>
         </div>
 
@@ -210,6 +227,9 @@ export function QuotationView({ quotation, onBack }: QuotationViewProps) {
             </div>
           </CardContent>
         </Card>
+
+        {/* Hidden Contract Document */}
+        <ContractGenerator quotation={quotation} />
       </div>
     </div>
   );

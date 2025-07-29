@@ -38,6 +38,33 @@ export type Database = {
         }
         Relationships: []
       }
+      invoice_emails: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          invoice_data: Json
+          quote_number: string
+          sent_at: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          invoice_data: Json
+          quote_number: string
+          sent_at?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          invoice_data?: Json
+          quote_number?: string
+          sent_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
