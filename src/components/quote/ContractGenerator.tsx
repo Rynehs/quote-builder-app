@@ -9,6 +9,14 @@ interface ContractGeneratorProps {
 export function ContractGenerator({ quotation }: ContractGeneratorProps) {
   const generateContract = () => {
     const element = document.getElementById('contract-document');
+    if (!element) {
+      console.error('Contract document not found');
+      return;
+    }
+    
+    // Temporarily show the element for PDF generation
+    element.classList.remove('hidden');
+    
     const opt = {
       margin: 0.5,
       filename: `contract-${quotation.quoteNumber}.pdf`,
@@ -16,11 +24,15 @@ export function ContractGenerator({ quotation }: ContractGeneratorProps) {
       html2canvas: { scale: 2, useCORS: true },
       jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
     };
-    html2pdf().set(opt).from(element).save();
+    
+    html2pdf().set(opt).from(element).save().then(() => {
+      // Hide the element again after PDF generation
+      element.classList.add('hidden');
+    });
   };
 
   return (
-    <>
+    <div className="contract-generator" ref={(ref) => { if (ref) (ref as any).generateContract = generateContract; }}>
       <Card id="contract-document" className="bg-white shadow-float border print:shadow-none print:border-0 hidden">
         <CardContent className="p-8 print:p-6">
           {/* Header */}
@@ -208,8 +220,6 @@ export function ContractGenerator({ quotation }: ContractGeneratorProps) {
           </div>
         </CardContent>
       </Card>
-      
-      <button onClick={generateContract} className="hidden">Generate Contract</button>
-    </>
+    </div>
   );
 }

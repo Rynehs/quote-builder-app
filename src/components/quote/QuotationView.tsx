@@ -34,15 +34,10 @@ export function QuotationView({ quotation, onBack }: QuotationViewProps) {
   };
 
   const handleGenerateContract = () => {
-    const element = document.getElementById('contract-document');
-    const opt = {
-      margin: 0.5,
-      filename: `contract-${quotation.quoteNumber}.pdf`,
-      image: { type: 'jpeg', quality: 0.98 },
-      html2canvas: { scale: 2, useCORS: true },
-      jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
-    };
-    html2pdf().set(opt).from(element).save();
+    const contractElement = document.querySelector('.contract-generator');
+    if (contractElement) {
+      (contractElement as any).generateContract();
+    }
   };
 
   return (
