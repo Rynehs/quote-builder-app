@@ -41,6 +41,12 @@ const Index = () => {
                 <ArrowRight className="h-5 w-5" />
               </Button>
             </Link>
+            <a href="https://builditworks.netlify.app" target="_blank" rel="noopener noreferrer">
+              <Button variant="outline" size="lg" className="text-lg px-8 py-6">
+                <Globe className="h-5 w-5" />
+                See Our Work
+              </Button>
+            </a>
           </div>
 
           {/* Features Grid */}
