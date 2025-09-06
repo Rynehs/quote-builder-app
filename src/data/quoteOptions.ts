@@ -82,7 +82,7 @@ export const websiteTypes: WebsiteType[] = [
 ];
 
 export const addOns: AddOn[] = [
-  { id: 'seo', name: 'SEO Optimization', price: 7000, description: 'Improve your website\'s search engine rankings with keyword optimization, meta tags, and technical SEO' },
+  { id: 'seo', name: 'SEO Optimization', price: 3500, description: 'Improve your website\'s search engine rankings with keyword optimization, meta tags, and technical SEO' },
   { id: 'whatsapp', name: 'WhatsApp Chat', price: 2000, description: 'Add a WhatsApp chat widget for instant customer communication and support' },
   { id: 'payment', name: 'Payment Integration', price: 6000, description: 'Integrate M-Pesa, PayPal, Stripe and other payment gateways for online transactions' },
   { id: 'logo', name: 'Logo Design', price: 3000, description: 'Professional logo design with multiple concepts, revisions, and brand guidelines' },
@@ -92,8 +92,8 @@ export const addOns: AddOn[] = [
 
 export const hostingPlans: HostingPlan[] = [
   { id: 'none', name: 'None', price: 0 },
-  { id: 'standard', name: 'Standard Hosting (Domain + Hosting)', price: 6000 },
-  { id: 'premium', name: 'Premium (Hosting + Maintenance)', price: 12000 },
+  { id: 'standard', name: 'Standard Hosting Annual (Domain + Hosting(To Include Maintenance=>750)', price: 6000 },
+  { id: 'premium', name: 'Annual Premium (Hosting + Maintenance)', price: 12000 },
 ];
 
 export const urgencyLevels: UrgencyLevel[] = [
